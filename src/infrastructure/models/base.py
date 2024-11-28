@@ -14,7 +14,9 @@ class Base(DeclarativeBase):
     )
 
     created_at: Mapped[datetime.datetime] = mapped_column(server_default=func.now())
-    updated_at: Mapped[datetime.datetime] = mapped_column(server_default=func.now(), server_onupdate=func.now())
+    updated_at: Mapped[datetime.datetime] = mapped_column(
+        server_default=func.now(), server_onupdate=func.now()
+    )
 
     repr_cols_num = 3
     repr_cols = ()

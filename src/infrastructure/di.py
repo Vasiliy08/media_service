@@ -22,10 +22,10 @@ def _init_container() -> Container:
 
     def create_cloud_storage():
         return S3Client(
-            aws_access_key_id = settings.cloud.aws_access_key_id,
-            aws_secret_access_key = settings.cloud.aws_secret_access_key,
-            endpoint_url = settings.cloud.endpoint_url,
-            bucket_name = settings.cloud.bucket_name,
+            aws_access_key_id=settings.cloud.aws_access_key_id,
+            aws_secret_access_key=settings.cloud.aws_secret_access_key,
+            endpoint_url=settings.cloud.endpoint_url,
+            bucket_name=settings.cloud.bucket_name,
         )
 
     container.register(S3Client, factory=create_cloud_storage, scope=Scope.singleton)

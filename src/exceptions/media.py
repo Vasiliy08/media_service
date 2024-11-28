@@ -10,4 +10,3 @@ class FileNotFoundException(ApplicationException):
     @property
     def message(self):
         return f"Файл c uuid {self.uuid} не найден"
-
