@@ -4,7 +4,14 @@ from uuid import UUID
 import punq
 from fastapi import HTTPException, Query, UploadFile, APIRouter, Depends, status
 from fastapi.responses import StreamingResponse
-from src.application.api.schemas import ApiResponse, ErrorSchema, Files, ListPaginatedResponse, PaginationIn, PaginationOut
+from src.application.api.schemas import (
+    ApiResponse,
+    ErrorSchema,
+    Files,
+    ListPaginatedResponse,
+    PaginationIn,
+    PaginationOut,
+)
 from src.exceptions.base import ApplicationException
 from src.infrastructure.cloude_s3.cloude import S3Client
 from src.infrastructure.repositories.media import MediaRepository
@@ -62,7 +69,6 @@ async def download_file(
     iter_file = container.response_file(file.original_name)
 
     return StreamingResponse(iter_file, media_type="application/octet-stream")
-
 
 
 @router.get(

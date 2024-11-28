@@ -74,9 +74,11 @@ class MediaRepository(DatabaseHelper):
             if pagination.order_by == "asc":
                 files = await session.execute(query)
                 return files.scalars().all()
-            files = await session.execute(query.order_by(desc(MediaFile.last_downloaded)))
+            files = await session.execute(
+                query.order_by(desc(MediaFile.last_downloaded))
+            )
             return files.scalars().all()
-        
+
     async def get_count_files(self):
         async with self.session_factory() as session:
             count = await session.scalar(select(func.count()).select_from(MediaFile))
