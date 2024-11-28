@@ -1,6 +1,7 @@
+from pathlib import Path
 from typing import Literal
 
-from pydantic import BaseModel, PostgresDsn
+from pydantic import BaseModel, Field, PostgresDsn
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings
 
@@ -46,9 +47,20 @@ class DatabaseConfig(BaseSettings):
     }
 
 
+class Cloud(BaseException):
+    aws_access_key_id: str = Field(alias='AWS_ACCESS_KEY_ID')
+    aws_secret_access_key:str = Field(alias='AWS_SECRET_ACCESS_KEY')
+    endpoint_url: str = Field(alias='ENDPOINT_URL')
+    bucket_name: str = Field(alias='BUCKET_NAME')
+    
+
 class Settings(BaseSettings):
     logger: LoggingConfig = LoggingConfig()
     db_config: DatabaseConfig = DatabaseConfig()
+    cloud: Cloud = Cloud()
+    
+    BASE_DIR: Path = Path(__file__).resolve().parent.parent.parent
+    UPLOAD_DIRECTORY: Path = BASE_DIR / "uploads"
 
 
 settings = Settings()
